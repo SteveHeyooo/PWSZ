@@ -1,0 +1,120 @@
+#include <iostream>
+#include <string>
+using namespace std;
+ 
+/* Nudny prosty pączek  */
+class Pączek {
+protected:
+string pączek;
+double wartosc;
+ 
+public:
+Pączek(){
+pączek = "Pączek";
+wartosc=0;
+}
+ 
+virtual string about(){
+return pączek;
+}
+ 
+virtual double cena(){
+return wartosc;
+}
+};
+ 
+/* wprowadzamy dekorator */
+class Dekorator : public Pączek {
+ 
+public:
+virtual string about(){
+return "To jest ...";
+}
+};
+ 
+/* Dodamy dwa rozaje pączków , amerykański(dunat) i  berlińskie  */
+class Dunot : public Pączek {
+public: Dunot():Pączek(){
+pączek = "Dunot";
+wartosc=4;
+}
+ 
+};
+ 
+class Berliński : public Pączek {
+ 
+public: Berliński():Pączek(){
+pączek = "berliński";
+wartosc=2;
+}
+ 
+};
+ 
+/* Osłodzamy jeszcze bardziej dadająć opcje nadziewane dżemem i polanie lukrem */
+class Dżem : public Dekorator {
+Pączek *rpączka;
+ 
+public: Dżem(Pączek *pączek):Dekorator(){
+rpączka = pączek;
+}
+ 
+string about(){
+return rpączka->about() + " + dżem";
+}
+ 
+double cena(){
+return rpączka->cena()+1 ;
+}
+};
+ 
+class Lukier : public Dekorator {
+Pączek *rpączka;
+ 
+public: Lukier(Pączek *pączek):Dekorator(){
+rpączka = pączek;
+}
+ 
+string about()
+{
+return rpączka->about() + " + lukier";
+}
+
+double cena()
+{
+return rpączka->cena() + 2;
+}
+};
+ 
+ 
+int main(){
+ 
+Pączek; *p1 = new Dunot();
+Pączek; *p2 = new Berliński();
+ 
+cout<<"\nCZysty bez dodadków"<<endl;
+cout<<p1->about()<<" "<<p1->cena()<<endl;
+cout<<p2->about()<<" "<<p2->cena()<<endl;
+ 
+//Dżem
+p1 = new Dżem(p1);
+p2 = new Dżem(p2);
+cout<<"\nZ Dżemem"<<endl;
+cout<<p1->about()<<" "<<p1->cena()<<endl;
+cout<<p2->about()<<" "<<p2->cena()<<endl;
+ 
+//Lukier
+ 
+p1 = new Lukier(p1);
+p2 = new Lukier(p2);
+cout<<"\nZ Lukrem"<<endl;
+cout<<p1->about()<<" "<<p1->cena()<<endl;
+cout<<p2->about()<<" "<<p2->cena()<<endl;
+ 
+//od razu tworzymy wyposazony samochod
+cout<<"\nPelne wyposazenie"<<endl;
+Pączek *p3 =  new Lukier( new K Dżem( new Berliński()));
+cout<<p3->about()<<" "<<p3->cena()<<endl;
+ 
+system("PAUSE");
+return 0;
+}
