@@ -110,7 +110,7 @@ cout<<"\nZ Lukrem"<<endl;
 cout<<p1->about()<<" "<<p1->cena()<<endl;
 cout<<p2->about()<<" "<<p2->cena()<<endl;
  
-//od razu tworzymy wyposazony samochod
+// Przykładowy pączek ze wszystkimi dodatkami
 cout<<"\nPelne wyposazenie"<<endl;
 Pączek *p3 =  new Lukier( new K Dżem( new Berliński()));
 cout<<p3->about()<<" "<<p3->cena()<<endl;
